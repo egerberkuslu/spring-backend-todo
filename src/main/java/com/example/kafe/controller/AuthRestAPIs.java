@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.kafe.message.request.LoginForm;
 import com.example.kafe.message.request.SignUpForm;
 import com.example.kafe.message.response.JwtResponse;
+import com.example.kafe.message.response.JwtResponseWithName;
 import com.example.kafe.model.Role;
 import com.example.kafe.model.RoleName;
 import com.example.kafe.model.User;
 import com.example.kafe.repository.RoleRepository;
 import com.example.kafe.repository.UserRepository;
 import com.example.kafe.security.jwt.JwtProvider;
+import com.example.kafe.security.services.UserDetailsServiceImpl;
  
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -45,6 +47,12 @@ public class AuthRestAPIs {
  
     @Autowired
     PasswordEncoder encoder;
+    
+    @Autowired
+    private JwtProvider tokenProvider;
+ 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
  
     @Autowired
     JwtProvider jwtProvider;
@@ -60,9 +68,9 @@ public class AuthRestAPIs {
         );
  
         SecurityContextHolder.getContext().setAuthentication(authentication);
- 
+        
         String jwt = jwtProvider.generateJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        return ResponseEntity.ok(new JwtResponseWithName(jwt,tokenProvider.getUserNameFromJwtToken(jwt)));
     }
  
     @PostMapping("/signup")
