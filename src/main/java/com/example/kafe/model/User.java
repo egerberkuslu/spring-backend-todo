@@ -27,7 +27,7 @@ import org.hibernate.annotations.NaturalId;
         })
 })
 public class User{
-  @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
  

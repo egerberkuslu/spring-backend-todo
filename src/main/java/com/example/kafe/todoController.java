@@ -1,6 +1,6 @@
 package com.example.kafe;
 
-import java.sql.Date;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin
 @Controller
 public class todoController {
+	
 	@Autowired
 	private todoRepository todorepo; 
 	@RequestMapping("/todo")
@@ -33,11 +34,11 @@ public class todoController {
 	}
 	@PostMapping(path="/todo/add")
 	public @ResponseBody void addtodo(@RequestBody todo new_todo) {
-		todorepo.add_todo(new_todo.getName(), new_todo.getDate(), new_todo.getDescribtion(),new_todo.getImage());
+		todorepo.add_todo(new_todo.getName(), new_todo.getStart_date(), new_todo.getDescribtion(),new_todo.getImage());
 	}
 	@PostMapping(path="/todo/update")
 	public @ResponseBody void updatetodo(@RequestBody todo new_todo) {
-		todorepo.update_todo(new_todo.getName(), new_todo.getDate(), new_todo.getDescribtion(),new_todo.getImage(),new_todo.getId());
+		todorepo.update_todo(new_todo.getName(), new_todo.getStart_date(), new_todo.getDescribtion(),new_todo.getImage(),new_todo.getId());
 	}
 	
 }
