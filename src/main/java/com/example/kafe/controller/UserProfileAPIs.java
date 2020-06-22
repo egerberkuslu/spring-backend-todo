@@ -37,7 +37,7 @@ public class UserProfileAPIs {
 	 
 	 @GetMapping("/profile")
 	 public @ResponseBody UserProfile getAll(@RequestHeader("Authorization") String bearerToken) {
-	     System.out.println("bearerToken"+bearerToken);
+
 		 bearerToken = bearerToken.replace("Bearer ","");
 		 String username  = tokenProvider.getUserNameFromJwtToken(bearerToken);
 		 User user = userRepository.findUserByUsername(username);
@@ -45,7 +45,7 @@ public class UserProfileAPIs {
 		 
 		 UserProfile userProfile = userProfileRepository.getProfile(username);
 		 userProfile.setRoles(user.getRoles());
-		 System.out.println("User Profile :"+userProfile.toString());
+
 		 return userProfile;
 	 }
 	 
