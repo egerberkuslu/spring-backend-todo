@@ -15,7 +15,7 @@ public interface todoRepository extends CrudRepository<todo, Integer> {
 	@Query(value="SELECT * FROM todo_elements WHERE id= :id",nativeQuery=true) Iterable<todo> getById(@Param("id") int id);
 	
 	@Modifying
-	@Query(value="INSERT INTO todo_elements ("+"name,"+"start_date"+","+"describtion,"+"image"+") VALUES (:name,:date,:desc,:img)",nativeQuery=true) @Transactional void add_todo(@Param("name") String name, @Param("date") String date,@Param("desc") String desc,@Param("img") String img);
+	@Query(value="INSERT INTO todo_elements (name,start_date,describtion,image,end_date,list_id ) VALUES (:name,:date,:desc,:img,:endDate,:listID)",nativeQuery=true) @Transactional void add_todo(@Param("name") String name, @Param("date") String date,@Param("desc") String desc,@Param("img") String img,@Param("endDate") String endDate, @Param("listID") Long listID);
 	
 	@Modifying
 	@Query(value="DELETE FROM todo_elements WHERE id= :id",nativeQuery=true) @Transactional void  delete_todo(@Param("id") int id);

@@ -46,7 +46,7 @@ public class todoController {
 	}
 	@PostMapping(path="/todo/add")
 	public @ResponseBody void addtodo(@RequestBody todo new_todo) {
-		todorepo.add_todo(new_todo.getName(), new_todo.getStart_date(), new_todo.getDescribtion(),new_todo.getImage());
+		todorepo.add_todo(new_todo.getName(), new_todo.getStart_date(), new_todo.getDescribtion(),new_todo.getImage(),new_todo.getEnd_date(),new_todo.getList_details().getId());
 	}
 	@PostMapping(path="/todo/update")
 	public @ResponseBody void updatetodo(@RequestBody todo new_todo) {
