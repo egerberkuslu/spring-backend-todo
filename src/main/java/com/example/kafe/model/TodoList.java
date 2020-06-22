@@ -23,6 +23,8 @@ public class TodoList {
  
     private String date;
     
+    private Long user_id;
+    
     @OneToMany(mappedBy="list_details")
     private Set<todo> todos;
     
@@ -56,6 +58,14 @@ public class TodoList {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
  
  

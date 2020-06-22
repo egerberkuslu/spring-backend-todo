@@ -3,6 +3,8 @@ package com.example.kafe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,16 @@ public class TodoListAPIs {
 		 User user = userRepository.findUserByUsername(username);
 		 
 		 return listRepository.getTodoList(user.getId());
+	 }
+	 
+	 @PostMapping("/list/add")
+	 public @ResponseBody void addList(@RequestHeader("Authorization") String token,@RequestBody TodoList list) {
+		 
+		 token = token.replace("Bearer ","");
+		 String username  = tokenProvider.getUserNameFromJwtToken(token);
+		 User user = userRepository.findUserByUsername(username);
+		 
+		 listRepository.addTodoList(list.getName(),list.getDate(),user.getId());
 	 }
 	
 }
